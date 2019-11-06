@@ -1,12 +1,12 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-#define unsigned long long ull
+#define ull unsigned long long
 
 void for0(ull n)
 {
-    unsigned long double root = sqrt(n);
+    long double root = sqrt(n);
     // double is int/double === double is double
     if (root == n/root)
         cout<<"Yes";
@@ -14,14 +14,33 @@ void for0(ull n)
         cout<<"No";
 
 }
+
+
+bool isPerfectSquare(ull x)
+{
+  // Find floating point value of
+  // square root of x.
+  long double sr = sqrt(x);
+
+  // If square root is an integer
+  return ((sr - floor(sr)) == 0);
+}
+
+
 int main()
 {
+      ull x = 152415789666209426002111556165263283035677489;
+  if (isPerfectSquare(x))
+    cout << "Yes";
+  else
+    cout << "No";
+
     ull n;
     cin>>n;
     switch(n%4)
     {
     case 0:
-
+        // is sqrt
         break;
 
 
