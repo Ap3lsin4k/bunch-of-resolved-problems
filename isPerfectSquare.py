@@ -61,6 +61,8 @@ def isSquare(n):
     return True
 
 for t in range(100):
+    n = 
+    
     isSquare(randint(10**25, 10**28))
 
 print("finished")
