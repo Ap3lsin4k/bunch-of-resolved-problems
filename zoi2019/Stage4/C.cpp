@@ -13,11 +13,28 @@ long long s(long long n)
     }
     return res;
 }
+void f(long long k)
+{
+	
+    for(long long i = k; i >= 1 && i >= k-1000; --i)
+    {
+    	cout<<i<<" ";
+		if(i+s(i)+s(s(i))+s(s(s(i)))==k) 
+		{
+			
+			cout<<"YES"<<endl<<i<<endl;
+			return;
+    	}
+    }
+	cout<<"NO"<<endl;
+	
+}
 int main()
 {
     cin>>k;
-    for(long long i = k; i > 0 && i >= k-1000; --i)
-        if(i+s(i)+s(s(i))+s(s(s(i)))==k) return cout<<"YES"<<endl<<i<<endl,0;
-    cout<<"NO"<<endl;
+    //for(int i=0; i<100; ++i) 
+    {
+    	f(k);cout<<"\n-\n";
+	}
     return 0;
 }
