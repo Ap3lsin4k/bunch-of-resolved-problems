@@ -1,0 +1,86 @@
+from PIL import Image
+import cv2
+def get_main_color(img):
+    colors = img.getcolors(2560) #put a higher value if there are many colors in your image
+    max_occurence, most_present = 0, 0
+    try:
+        for c in colors:
+            if c[0] > max_occurence:
+                (max_occurence, most_present) = c
+        return most_present
+    except TypeError:
+        raise Exception("Too many colors in the image")
+def get_avg_color(img):
+    red, green, blue = 0, 0, 0
+    n = len(img)*len(img[0])
+    for row in img:
+        for pixel in row:
+            red += pixel[0]
+            green += pixel[1]
+            blue += pixel[2]
+            #print(pixel)
+    red = red/n
+    green = green / n
+    blue = blue / n
+    return(red,green,blue)
+#img = cv2.imread("Photo1.jpg")
+#get_avg_color(img)
+def imposition(img1,img2):
+    im1 = img1
+    im2 = img2
+    im1.paste(im2, (j,i), im2)
+    Photosave=im1
+img = Image.open("Photo1.jpg")
+img2 = Image.open("Photo2.jpg")
+imgwidth, imgheight = img.size
+#img.crop((30, 30, w-80, h-40)).save("file.png")
+amount = 1;
+width, length = 160, 250
+img3 = Image.new("RGBA", (220, 220), (255, 255, 255)) 
+img3 = Image.open("redd-11.png").convert("RGBA")
+img3 = img3.resize((width,length), Image.ANTIALIAS)
+img3.save("red.png")
+Photosave=Image.open("Photo1.jpg")
+Photosave2=Image.open("Photo2.jpg")
+for i in range(0,imgheight,length):
+    for j in range(0,imgwidth,width):
+        if j+width > imgwidth:
+            w = imgwidth
+        else:
+            w = j+width
+        if i+length > imgheight:
+            h = imgheight
+        else:
+            h = i+length
+        
+        #img.crop((j, i, w, h)).save("images/file"+str(amount)+".png")
+        cropimages1=img.crop((j, i, w, h))
+        cropimages2=img2.crop((j, i, w, h))
+        imgg1=cropimages1
+        imgg2 = cropimages2
+        imgg1.save("1Crop.jpg")
+        imgg2.save("2Crop.jpg")
+        imgg1= cv2.imread("1Crop.jpg")
+        imgg2 = cv2.imread("2Crop.jpg")
+        color1 =  get_avg_color(imgg1)
+        color2 =  get_avg_color(imgg2)
+        mult = abs(color1[0]-color2[0]) * abs(color1[1]-color2[1]) * abs(color1[2]-color2[2])
+        if not(mult<=5000):
+            imposition(Photosave,img3)
+            imposition(Photosave2,img3)
+            #cropimages1.save("uncommon/"+"(1)"+str(amount)+str(color1)+".jpg")
+            #cropimages2.save("uncommon/"+"(2)"+str(amount)+str(color2)+".jpg")
+        amount=amount+1
+image1 = Photosave
+image2 = Photosave2
+(width1, height1) = image1.size
+(width2, height2) = image2.size
+result_width1 = width1+width2
+result_height1 = max(height1,height2)
+result1=Image.new('RGB', (result_width1, result_height1))
+result1.paste(im=image1, box=(0,0))
+result1.paste(im=image2, box=(width2,0))
+result1.save("resultall.jpg")
+
+
+
