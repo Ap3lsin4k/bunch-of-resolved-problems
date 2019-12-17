@@ -4,31 +4,46 @@ using namespace std;
 
 
 
-vector<int> a;
-set<vector<int>> allProgression;
+static vector<int> a;
+static set<vector<int>> allProgression;
+static vector<int> progressionToBeSavedInSet;
 
-vector<int> progressionToBeSavedInSet;
-
-int f(unsigned int i, int diff, int length)
+void f(vector<int>::iterator previousItem, int diff)
 {
-
-}
-
-void recursionBegin(unsigned int i, int diff, int length)
-{
+    progressionToBeSavedInSet.push_back(*previousItem);
     //found
-    if(binary_search(a.begin()+i, a.end(), a[i]+diff))
+    vector<int>::iterator nextItem = find(a.begin(), a.end(), *previousItem+diff);
+    if(nextItem != a.end())//found
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
-        f(i+1, diff, length);
+        f(nextItem, diff);
     }
-    else
-    {
-        //length of progresion is two, it is non-sence
-
-    }
+    //exit if end of progression
 }
 
+void findAndSaveTheProgression(vector<int>::iterator iterat, int diff)
+{
+    //to do how much items were found in the vector
+    vector<int>::iterator nextItem = find (a.begin(), a.end(), *iterat+diff);
+
+    if(nextItem != a.end())
+    {
+        //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
+        //unsigned int
+        f(nextItem, diff); // do recursion and push back to progression
+
+        allProgression.insert(progressionToBeSavedInSet);
+    }
+ //   else
+        //length of progresion is two, it is non-sence
+
+}
+
+//let all items in the progression is unique
+//todo test time limit
+// let diff always be >= 0
+//let diff != 0
+// let number of progression is always three or another words we don't need to separate progression to two
 int main()
 {
     int k;
@@ -45,12 +60,38 @@ int main()
     sort(a.begin(), a.end());
 
    // for(vector<int>::iterator it =a.begin(); it!= a.end(); ++it)
-    for(int i=1; i<a.size(); ++i)
+    for(unsigned int i=0; i<a.size()-1; ++i)
     {
-        int diff=a[i]-a[i-1];
-        progressionToBeSavedInSet.pu
-        f(i, diff, 2);//length is 2
+        //for b[0] == 1;
+        //diff = 10, progression 1, 11, 21
+        //diff = 12, prog 1, 13, 25
+        //...
+        //dif
+        for(unsigned int j=i+1; j<a.size(); ++j)
+        {
+            //a[i] = 1
+            //a[j] = 2, 3, 4, 11, 12, 13, 14, 16, ...
+            int diff=a[j]-a[i];
+            progressionToBeSavedInSet.push_back(a[i]);
+            progressionToBeSavedInSet.push_back(a[j]);
+
+            //length is above or eqaual to three
+            findAndSaveTheProgression(a.begin()+j, diff); //length is not
+
+            progressionToBeSavedInSet.clear();
+        }
     }
+    for(vector<int> myProgression : allProgression)
+    {
+        for(int elementInProgression : myProgression)
+        {
+            cout<<elementInProgression<<" ";
+        }
+        cout<<"\n";
+    }
+
+    cout<<endl;
+
     cout<<endl;
     //
     //
@@ -117,3 +158,111 @@ int main()
 1 1 1
 
 * */
+/*
+20
+1 2 3 4 11 12 12 13 13 14 16 18 19 21 22 24 25 25 33 34
+
+1 2 3
+1 11 21 31
+1 12 23 34
+1 14 27
+1 16 31
+2 12 22
+2 16 30
+2 18 34
+3 11 19 27
+3 12 21 30
+3 13 23 33
+3 18 33
+11 12 13 14
+11 16 21
+11 19 27
+11 21 31
+11 22 33
+12 13 14
+12 14 16 18
+12 21 30
+12 23 34
+13 16 19 22
+13 18 23
+13 22 31
+13 23 33
+14 16 18
+14 18 22
+14 22 30
+16 19 22
+16 23 30
+19 21 23
+19 23 27 31
+21 22 23
+21 27 33
+23 27 31
+27 30 33
+
+*/
+/*
+21
+1 2 3 4 5 6 11 12 13 14 16 18 19 21 22 23 27 30 31 33 34
+
+1 2 3 4 5 6 // there are no 1 2 3 4 5 or 1 2 3 4 or 1 2 3;
+1 3 5
+1 6 11 16 21
+1 11 21 31
+1 12 23 34
+1 14 27
+1 16 31
+2 3 4 5 6
+2 4 6
+2 12 22
+2 16 30
+2 18 34
+3 4 5 6
+3 11 19 27
+3 12 21 30
+3 13 23 33
+3 18 33
+4 5 6
+4 11 18
+4 13 22 31
+4 19 34
+5 12 19
+5 13 21
+5 14 23
+5 16 27
+5 18 31
+5 19 33
+6 11 16 21
+6 12 18
+6 14 22 30
+6 18 30
+11 12 13 14
+11 16 21
+11 19 27
+11 21 31
+11 22 33
+12 13 14
+12 14 16 18
+12 21 30
+12 23 34
+13 16 19 22
+13 18 23
+13 22 31
+13 23 33
+14 16 18
+14 18 22
+14 22 30
+16 19 22
+16 23 30
+19 21 23
+19 23 27 31
+21 22 23
+21 27 33
+23 27 31
+27 30 33
+
+
+6
+16
+Press <RETURN> to close this window...
+
+ */
