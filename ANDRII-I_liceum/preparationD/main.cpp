@@ -48,7 +48,7 @@ int main()
 {
     int k;
     cin>>k;
-    int d, series, maxlength=1, numberOfArithmeticProgression=0, firstTerm, minDiff=INT_MAX;
+    int d, series, maxLength=1, numberOfArithmeticProgression=0, firstTerm, minDiff=INT_MAX;
 
     string name="sadkasdkl";
     for(int i=0; i<k; ++i)
@@ -93,10 +93,40 @@ int main()
     cout<<endl;
 
     cout<<endl;
+    vector<int>::size_type numberOfAPwithMaxLength=0; // type is unsigned int
+    for(vector<int> myProgression : allProgression)
+    {
+        if(myProgression.size() > maxLength)
+        {
+            maxLength = myProgression.size();
+            numberOfAPwithMaxLength=1; // count again
+        }
+        if(numberOfAPwithMaxLength == maxLength)
+        {
+            ++numberOfAPwithMaxLength;
+        }
+
+    }
+
+    for(vector<int> myProgression : allProgression)
+    {
+        d=myProgression[1]-myProgression[0];
+        if(d<minDiff)
+        {
+            firstTerm = myProgression[0];
+            minDiff = d;
+        }
+
+
+
+
+
+    }
     //
     //
     //if(k==1) {cout<<1<<endl<<1<<endl<< return 0;}
     // k
+    /*
     d=a[1]-a[0];
     series = 1; // length of current chain
     numberOfArithmeticProgression=1;
@@ -127,8 +157,11 @@ int main()
 
             tempFirstElemOfProgress = a[i-1];
         }
-    }
-    cout<<maxlength<<"\n";
+    }*/
+    cout<<"\nANSWERS\n";
+    cout<<maxLength<<"\n";
+    cout<<numberOfAPwithMaxLength<<"\n";
+    cout<<firstTerm<<"\n";
     cout<<numberOfArithmeticProgression<<"\n";
 
     return 0;
