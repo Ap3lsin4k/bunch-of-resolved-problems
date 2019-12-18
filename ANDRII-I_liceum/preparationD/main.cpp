@@ -8,29 +8,29 @@ static vector<int> a;
 static set<vector<int>> allProgression;
 static vector<int> progressionToBeSavedInSet;
 
-void f(vector<int>::iterator previousItem, int diff)
+void f(unsigned int beginRange, vector<int>::iterator previousItem, int diff)
 {
     progressionToBeSavedInSet.push_back(*previousItem);
     //found
-    vector<int>::iterator nextItem = find(a.begin(), a.end(), *previousItem+diff);
+    vector<int>::iterator nextItem = find(a.begin()+beginRange+1, a.end(), *previousItem+diff);
     if(nextItem != a.end())//found
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
-        f(nextItem, diff);
+        f(beginRange+1, nextItem, diff);
     }
     //exit if end of progression
 }
 
-void findAndSaveTheProgression(vector<int>::iterator iterat, int diff)
+void findAndSaveTheProgression(unsigned int beginRange, vector<int>::iterator iterat, int diff)
 {
     //to do how much items were found in the vector
-    vector<int>::iterator nextItem = find (a.begin(), a.end(), *iterat+diff);
+    vector<int>::iterator nextItem = find (a.begin()+beginRange+1, a.end(), *iterat+diff); // important +1
 
     if(nextItem != a.end())
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
         //unsigned int
-        f(nextItem, diff); // do recursion and push back to progression
+        f(beginRange+1, nextItem, diff); // do recursion and push back to progression
 
         allProgression.insert(progressionToBeSavedInSet);
     }
@@ -39,18 +39,21 @@ void findAndSaveTheProgression(vector<int>::iterator iterat, int diff)
 
 }
 
-//let all items in the progression is unique
-//todo test time limit
-// let diff always be >= 0
-//let diff != 0
+//let all items in the progression is unique therefore d!=0
+//todo d == 0
 // let number of progression is always three or another words we don't need to separate progression to two
+// let diff always be >= 0
+/*\
+5
+1 1 1 2 3
+
+ */
 int main()
 {
     int k;
     cin>>k;
-    int d, series, maxLength=1, numberOfArithmeticProgression=0, firstTerm, minDiff=INT_MAX;
+    int d, maxLength=0, firstTerm, minDiff=INT_MAX;
 
-    string name="sadkasdkl";
     for(int i=0; i<k; ++i)
     {
         int unsortedArifmeticTerm;
@@ -76,11 +79,13 @@ int main()
             progressionToBeSavedInSet.push_back(a[j]);
 
             //length is above or eqaual to three
-            findAndSaveTheProgression(a.begin()+j, diff); //length is not
-
+            findAndSaveTheProgression(j, a.begin()+j, diff); //length is not
+//critical if d == 0
+            // number of the same number;
             progressionToBeSavedInSet.clear();
         }
     }
+    /*
     for(vector<int> myProgression : allProgression)
     {
         for(int elementInProgression : myProgression)
@@ -93,6 +98,7 @@ int main()
     cout<<endl;
 
     cout<<endl;
+    */
     vector<int>::size_type numberOfAPwithMaxLength=0; // type is unsigned int
     for(vector<int> myProgression : allProgression)
     {
@@ -101,7 +107,7 @@ int main()
             maxLength = myProgression.size();
             numberOfAPwithMaxLength=1; // count again
         }
-        if(numberOfAPwithMaxLength == maxLength)
+        else if(myProgression.size() == maxLength)
         {
             ++numberOfAPwithMaxLength;
         }
@@ -111,7 +117,7 @@ int main()
     for(vector<int> myProgression : allProgression)
     {
         d=myProgression[1]-myProgression[0];
-        if(d<minDiff)
+        if(d<minDiff) // do at least once
         {
             firstTerm = myProgression[0];
             minDiff = d;
@@ -158,11 +164,12 @@ int main()
             tempFirstElemOfProgress = a[i-1];
         }
     }*/
-    cout<<"\nANSWERS\n";
+//    cout<<"\nANSWERS\n";
     cout<<maxLength<<"\n";
     cout<<numberOfAPwithMaxLength<<"\n";
     cout<<firstTerm<<"\n";
-    cout<<numberOfArithmeticProgression<<"\n";
+    cout<<minDiff<<"\n";
+    int b[256];
 
     return 0;
 }
@@ -173,6 +180,10 @@ int main()
 другому - кiлькiсть прогресiй в яких данна максимальна довжина,
 третьому - перший елемент прогресiї з найменшою рiзницею арифметичною прогресiї i в
 четвертому - найменшу рiзницю арифметичної прогресiї.
+
+
+five find all possible progression
+find unqiue and if length of progression
 
 1 2 3 2 1
 */
@@ -297,5 +308,7 @@ int main()
 6
 16
 Press <RETURN> to close this window...
+19
+1 2 3 4 11 12 13 14 16 18 19 21 22 23 27 30 31 33 34
 
  */
