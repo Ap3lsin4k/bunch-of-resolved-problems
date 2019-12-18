@@ -8,40 +8,20 @@ static vector<int> a;
 static set<vector<int>> allProgression;
 static vector<int> progressionToBeSavedInSet;
 
-void f(int beginRange, vector<int>::iterator previousItem, int diff)
-{
-    vector<int>::iterator nextItem;
 
-    /*
-    progressionToBeSavedInSet.push_back(*previousItem);
-    //found
-   if(nextItem != a.end())//found
-    {
-        //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
-        f(beginRange+1, nextItem, diff);
-    }*/
-    //exit if end of progression
-    /* loop
-     * */
-
-
-}
-
-void findAndSaveTheProgression(int beginRange, vector<int>::iterator iterat, int diff)
+void findAndSaveTheProgression(unsigned int beginRange, vector<int>::iterator iterat, int diff)
 {
     //to do how much items were found in the vector
-    ++beginRange;
-    vector<int>::iterator nextItem = find (a.begin()+beginRange, a.end(), *iterat+diff); // important +1
+    ++beginRange;// important +1
+    vector<int>::iterator nextItem = find (a.begin()+int(beginRange), a.end(), *iterat+diff);
 
     if(nextItem != a.end())
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
         //unsigned int
-   //     vector<int>::iterator previousItem = nextItem;
         do {
- //           previousItem = nextItem;
-            progressionToBeSavedInSet.push_back(*nextItem);
-            nextItem = find(a.begin()+beginRange+1, a.end(), *nextItem+diff);
+            progressionToBeSavedInSet.push_back(*nextItem); // save elem of progression
+            nextItem = find(a.begin()+int(beginRange)+1, a.end(), *nextItem+diff);
             beginRange = beginRange+1;
         } while (nextItem != a.end());
 
@@ -59,17 +39,26 @@ void findAndSaveTheProgression(int beginRange, vector<int>::iterator iterat, int
 1 1 1 2 3
 
  */
+static bool debugMode=true;
 int main()
 {
     int k;
     cin>>k;
-    int d, maxLength=0, firstTerm, minDiff=INT_MAX;
-
+    int d, firstTerm, minDiff=INT_MAX;
+    unsigned int maxLength=0;
     for(int i=0; i<k; ++i)
     {
         int unsortedArifmeticTerm;
         cin>>unsortedArifmeticTerm;
         a.push_back(unsortedArifmeticTerm);
+    }
+
+    if(k == 2){
+        cout<<"2\n1\n";
+        cout<<min(a[0], a[1])<<"\n";
+        cout<<abs(a[1]-a[0])<<"\n";
+
+        return 0;
     }
     sort(a.begin(), a.end());
 
@@ -90,26 +79,27 @@ int main()
             progressionToBeSavedInSet.push_back(a[j]);
 
             //length is above or eqaual to three
-            findAndSaveTheProgression(int(j), a.begin()+j, diff); //length is not
+            findAndSaveTheProgression(j, a.begin()+j, diff); //length is not
 //critical if d == 0
             // number of the same number;
             progressionToBeSavedInSet.clear();
         }
     }
-    /*
-    for(vector<int> myProgression : allProgression)
+    if(debugMode)
     {
-        for(int elementInProgression : myProgression)
+        for(vector<int> myProgression : allProgression)
         {
-            cout<<elementInProgression<<" ";
+            for(int elementInProgression : myProgression)
+            {
+                cout<<elementInProgression<<" ";
+            }
+            cout<<"\tdiff: "<<myProgression[1]-myProgression[0]<<"\n";
         }
-        cout<<"\n";
+
+        cout<<endl;
+
+        cout<<endl;
     }
-
-    cout<<endl;
-
-    cout<<endl;
-    */
     vector<int>::size_type numberOfAPwithMaxLength=0; // type is unsigned int
     for(vector<int> myProgression : allProgression)
     {
@@ -179,8 +169,7 @@ int main()
     cout<<maxLength<<"\n";
     cout<<numberOfAPwithMaxLength<<"\n";
     cout<<firstTerm<<"\n";
-    cout<<minDiff<<"\n";
-    int b[256];
+    cout<<minDiff;
 
     return 0;
 }
