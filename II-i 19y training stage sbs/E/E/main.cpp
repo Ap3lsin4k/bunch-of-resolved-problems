@@ -24,76 +24,87 @@ int main()
     }
 
     cin>>q;
-    for(ui i=0; i<q; ++i)
+    for(auto myPair : m)
     {
-        cin>>l>>r>>S;
+        S = myPair.first;
+        for(ui l=1; l<=n; ++l)
+        {
+            for(ui r=l; r<=n; ++r)
+            {
 
-        //binary search
-        //keys is number of such string in range(begining to this index) with the value
-        //value is index in global order
-        if(m[S].empty())
-        {
-            cout<<"0\n";
-            continue;
-        }
-        vector<int> indexes= m[S];
-        ui pivot, pivotEnd;
-        bool flagLNull=true, flagRNull=true;
-        //find pivot that indexes == l
-        //todo find;
+                //binary search
+                //keys is number of such string in range(begining to this index) with the value
+                //value is index in global order
+                if(m[S].empty())
+                {
+                    cout<<"0\n";
+                    continue;
+                }
+                vector<int> indexes= m[S];
+                ui pivot, pivotEnd;
+                bool flagLNull=true, flagRNull=true;
+                //find pivot that indexes == l
+                //todo find;
 
-        for(ui j=0; j<indexes.size(); ++j)
-        {
-            //l=7
-            //i=2
-            //indexes= 1, 3, 7, 11
-            if(indexes[j] == l)
-            {
-                pivot = j; // 4 - 2
-                flagLNull = false;
-                break;
-            }
-            //l = 4
-            //1 3 7 11
-            //indexes[2] = 7
-            if(indexes[j] > l)
-            {
-                pivot = j;//length -pivot = 4 - 2 = 2
-                flagLNull = false;
-                break;
+                for(ui j=0; j<indexes.size(); ++j)
+                {
+                    //l=7
+                    //i=2
+                    //indexes= 1, 3, 7, 11
+                    if(indexes[j] == l)
+                    {
+                        pivot = j; // 4 - 2
+                        flagLNull = false;
+                        break;
+                    }
+                    //l = 4
+                    //1 3 7 11
+                    //indexes[2] = 7
+                    if(indexes[j] > l)
+                    {
+                        pivot = j;//length -pivot = 4 - 2 = 2
+                        flagLNull = false;
+                        break;
+                    }
+                }
+
+                for(int j=indexes.size()-1; j>=0; --j)
+                {
+                    //r=10
+                    //1 3 5 7 10 11
+                    //i=4
+                    if(indexes[j]==r)
+                    {
+                        pivotEnd=j+1;
+                        flagRNull = false;
+                        break;
+                    }
+                    /*
+                     r=9
+                     1 3 5 7 10 11
+                     i=4
+        */
+                    if(indexes[j] < r)
+                    {
+                        pivotEnd = j+1; // size of the vector
+                        flagRNull = false;
+                        break;
+                    }
+                }
+
+                cout<<"l, r:"<<l<<" "<<r<<" ";
+                if(flagLNull or flagRNull)
+                {
+                    // r набагато менший за першу появу рядка
+                    cout<<"0\n";
+                }
+                else
+                    cout<<pivotEnd-pivot<<"\n";
             }
         }
 
-        for(int j=indexes.size()-1; j>=0; --j)
-        {
-            //r=10
-            //1 3 5 7 10 11
-            //i=4
-            if(indexes[j]==r)
-            {
-                pivotEnd=j+1;
-                flagRNull = false;
-                break;
-            }
-            /*
-             r=9
-             1 3 5 7 10 11
-             i=4
-*/
-            if(indexes[j] < r)
-            {
-                pivotEnd = j+1; // size of the vector
-                flagRNull = false;
-                break;
-            }
-        }
-        if(flagLNull or flagRNull)
-        {
-            // r набагато менший за першу появу рядка
-            cout<<"0\n";
-        }
-        else
-            cout<<pivotEnd-pivot<<"\n";
+
+
     }
 
     return 0;
