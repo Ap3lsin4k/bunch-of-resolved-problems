@@ -8,29 +8,42 @@ static vector<int> a;
 static set<vector<int>> allProgression;
 static vector<int> progressionToBeSavedInSet;
 
-void f(unsigned int beginRange, vector<int>::iterator previousItem, int diff)
+void f(int beginRange, vector<int>::iterator previousItem, int diff)
 {
+    vector<int>::iterator nextItem;
+
+    /*
     progressionToBeSavedInSet.push_back(*previousItem);
     //found
-    vector<int>::iterator nextItem = find(a.begin()+beginRange+1, a.end(), *previousItem+diff);
-    if(nextItem != a.end())//found
+   if(nextItem != a.end())//found
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
         f(beginRange+1, nextItem, diff);
-    }
+    }*/
     //exit if end of progression
+    /* loop
+     * */
+
+
 }
 
-void findAndSaveTheProgression(unsigned int beginRange, vector<int>::iterator iterat, int diff)
+void findAndSaveTheProgression(int beginRange, vector<int>::iterator iterat, int diff)
 {
     //to do how much items were found in the vector
-    vector<int>::iterator nextItem = find (a.begin()+beginRange+1, a.end(), *iterat+diff); // important +1
+    ++beginRange;
+    vector<int>::iterator nextItem = find (a.begin()+beginRange, a.end(), *iterat+diff); // important +1
 
     if(nextItem != a.end())
     {
         //if b[0], b[1], b[2]... - arifmetic progression, a[1]=a[i], if b[2] exist and equal b[1]+diff exist
         //unsigned int
-        f(beginRange+1, nextItem, diff); // do recursion and push back to progression
+   //     vector<int>::iterator previousItem = nextItem;
+        do {
+ //           previousItem = nextItem;
+            progressionToBeSavedInSet.push_back(*nextItem);
+            nextItem = find(a.begin()+beginRange+1, a.end(), *nextItem+diff);
+            beginRange = beginRange+1;
+        } while (nextItem != a.end());
 
         allProgression.insert(progressionToBeSavedInSet);
     }
@@ -39,10 +52,8 @@ void findAndSaveTheProgression(unsigned int beginRange, vector<int>::iterator it
 
 }
 
-//let all items in the progression is unique therefore d!=0
-//todo d == 0
-// let number of progression is always three or another words we don't need to separate progression to two
-// let diff always be >= 0
+
+// test and find bug;
 /*\
 5
 1 1 1 2 3
@@ -79,7 +90,7 @@ int main()
             progressionToBeSavedInSet.push_back(a[j]);
 
             //length is above or eqaual to three
-            findAndSaveTheProgression(j, a.begin()+j, diff); //length is not
+            findAndSaveTheProgression(int(j), a.begin()+j, diff); //length is not
 //critical if d == 0
             // number of the same number;
             progressionToBeSavedInSet.clear();
