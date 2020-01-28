@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1573463986 source:d:\2-i_fedorko_problems\zoi2019\stage3\b\b\main.cpp
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<iostream>
-

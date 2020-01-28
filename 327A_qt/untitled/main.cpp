@@ -68,5 +68,5 @@ int main()
     return 0;
 }
 //iftrue
-a+1
-false_type
+//a+1
+//false_type
