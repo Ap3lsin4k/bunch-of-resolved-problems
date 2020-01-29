@@ -1,36 +1,106 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <iterator>
+#include <list>
 
 using namespace std;
 typedef unsigned short us;
 typedef unsigned int ui;
-
 
 /*
 excuses
 let x1<x3
  * */
 
-
 int main()
 {
     ui n;
-    cin>>n;
+    cin >> n;
     set<char> temporarySetChar;
-    vector<set<char>> s(n, temporarySetChar);
+    list<set<char>> s(n, temporarySetChar);
     string tempString;
-    for(ui i=0; i<n; ++i)
+    for (auto it = s.begin(); it != s.end(); ++it)
     {
-        cin>>tempString;
-        for(ui j=0; j<tempString.size(); ++j)
+        cin >> tempString;
+        for (ui j = 0; j < tempString.size(); ++j)
         {
-            s[i].insert(tempString[j]);
+            (*it).insert(tempString[j]);
         }
 
     }
 
+    for (list<set<char>>::iterator parent = s.begin(); parent != s.end(); ++parent)
+    {
+        list<set<char>>::iterator password = parent;
+        for (++password; password != s.end(); ++password)
+        {
+            bool flag = false;
+            //does it work properly
+            for (char symbol : *parent)
+            {
+                cout << symbol << " ";
+                //at least one symbol in parent
+                if ((*password).find(symbol) != password->end())
+                {
+                    cout << "Given first set: \"";
+                    for (auto symToPrint : *parent)
+                    {
+                            cout << symToPrint;
+                    }
+                    cout << "\", and second set: \"";
+                    for (auto symToPrint : *password)
+                    {
+                        cout << symToPrint;
+                    }
+                    cout<<"\", common item is '"<<symbol<<"' at position 0x";
+//					cout << &((*password).find(symbol));
+                    cout<< "\n";
 
+                    parent->insert(password->begin(), password->end());
+                    flag = true;
+                    break;// pasword
+                }
+            }
+            if (flag)
+            {
+                // Notice that the iterator is decremented after it is passed
+                // to erase() but before erase() is executed
+
+                s.erase(password--);
+            }
+            cout << "\n";
+        }
+    }
+
+
+
+
+    cout << "\n\n========AFTER_MERGING========\n";
+    for (auto str: s)
+    {
+        for (auto ch : str)
+        {
+            cout << ch;
+        }
+        cout << "\n";
+    }
     return 0;
 }
+/*
+10
+abbaba
+absdasdas
+asdjasd
+asdasklk
+klkl
+wk
+wew
+ewew
+klk
+kkl
+*/
 /*
 Make shorter input from 10**6 to 27
 for each set
@@ -41,5 +111,6 @@ for each set
         next set
 }
 
-
+//create memory of deleted password and check
 */
+//if sets intersects
