@@ -14,6 +14,23 @@ excuses
 let x1<x3
  * */
 
+
+
+/*void f
+
+
+void f2(set<char>& queue)
+{
+    for (char extraSymbol : queue)
+    {
+            for (++password; password != s.end(); ++password)
+            {
+
+            }
+    }
+    parent->insert(queue.begin(), queue.end());
+}*/
+
 int main()
 {
     ui n;
@@ -31,48 +48,80 @@ int main()
 
     }
 
+
     for (list<set<char>>::iterator parent = s.begin(); parent != s.end(); ++parent)
     {
-        list<set<char>>::iterator password = parent;
-        for (++password; password != s.end(); ++password)
-        {
-            bool flag = false;
-            //does it work properly
-            for (char symbol : *parent)
+        set<char> temporaryParent = *parent;
+        bool again;
+         do{
+            set<char> queue;
+            list<set<char>>::iterator password = parent;
+            for (++password; password != s.end(); ++password)
             {
-                cout << symbol << " ";
-                //at least one symbol in parent
-                if ((*password).find(symbol) != password->end())
+                //does it work properly
+                for (char symbol : temporaryParent)
                 {
-                    cout << "Given first set: \"";
-                    for (auto symToPrint : *parent)
+                    cout << symbol << " ";
+                    //at least one symbol in parent
+                    if ((*password).find(symbol) != password->end())
                     {
+                        cout << "Given first set: \"";
+                        for (char aSetToPrint : temporaryParent)
+                        {
+                                cout << aSetToPrint;
+                        }
+                        cout << "\", and second set: \"";
+                        for (char symToPrint : *password)
+                        {
                             cout << symToPrint;
-                    }
-                    cout << "\", and second set: \"";
-                    for (auto symToPrint : *password)
-                    {
-                        cout << symToPrint;
-                    }
-                    cout<<"\", common item is '"<<symbol<<"' at position 0x";
-//					cout << &((*password).find(symbol));
-                    cout<< "\n";
+                        }
+                        cout<<"\", common item is '"<<symbol<<"'. Union that to parent: \"";
+                        for (char parentSetToPrint : *parent)
+                        {
+                            cout << parentSetToPrint;
+                        }
+                        //cout << ((*password).find(symbol));
+                        cout<< "\"\n";
 
-                    parent->insert(password->begin(), password->end());
-                    flag = true;
-                    break;// pasword
+                        //delete parent->insert(password->begin(), password->end());
+                        queue.insert(password->begin(), password->end());
+
+                        // Notice that the iterator is decremented after it is passed
+                        // to erase() but before erase() is executed
+                        s.erase(password--);
+                        break;// pasword
+                    }
                 }
-            }
-            if (flag)
-            {
-                // Notice that the iterator is decremented after it is passed
-                // to erase() but before erase() is executed
+                //deprecated
 
-                s.erase(password--);
+                cout << "\n";
             }
-            cout << "\n";
-        }
+           //before going to next parent check if
+//            password = parent;
+//            set<char> queue;
+
+//            for (char extraSymbol : queue)
+//            {
+//                for (++password; password != s.end(); ++password)
+//                {
+
+//                }
+//            }
+            again = not queue.empty();
+            if (again)
+            {
+                //it contains new chars
+                temporaryParent = queue;
+
+                //add new symbols to list
+                parent->insert(queue.begin(), queue.end());
+
+                //empty queue at next iteration
+            }
+
+        }while(again);
     }
+
 
 
 
