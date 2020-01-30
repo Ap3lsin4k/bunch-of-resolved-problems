@@ -1,13 +1,9 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <set>
-#include <iterator>
-#include <list>
+#include <bits/stdc++.h>
+#include <stdio.h>
+#include <time.h>
 
 using namespace std;
-typedef unsigned short us;
-typedef unsigned int ui;
+
 
 /*
 excuses
@@ -16,75 +12,15 @@ let x1<x3
 
 int main()
 {
-	ui n;
-	cin >> n;
-	set<char> temporarySetChar;
-	list<set<char>> s(n, temporarySetChar);
-	string tempString;
-	for (auto it = s.begin(); it != s.end(); ++it)
-	{
-		cin >> tempString;
-		for (ui j = 0; j < tempString.size(); ++j)
-		{
-			(*it).insert(tempString[j]);
-		}
+    unsigned long long n=123123123;
+	bool f;
 
-	}
-
-	for (list<set<char>>::iterator parent = s.begin(); parent != s.end(); ++parent)
-	{
-		list<set<char>>::iterator password = parent;
-		for (++password; password != s.end(); ++password)
-		{
-			bool flag = false;
-			//does it work properly
-			for (char symbol : *parent)
-			{
-				cout << symbol << " ";
-				//at least one symbol in parent
-				if ((*password).find(symbol) != password->end())
-				{
-					cout << "Given first set: \"";
-					for (auto symToPrint : *parent)
-					{
-							cout << symToPrint;
-					}
-					cout << "\", and second set: \"";
-					for (auto symToPrint : *password)
-					{
-						cout << symToPrint;
-					}
-					cout<<"\", common item is '"<<symbol<<"' at position 0x";
-//					cout << &((*password).find(symbol));
-					cout<< "\n";
-
-					parent->insert(password->begin(), password->end());
-					flag = true;
-					break;// pasword
-				}
-			}
-			if (flag)
-			{
-				// Notice that the iterator is decremented after it is passed
-				// to erase() but before erase() is executed
-				s.erase(password--);
-			}
-			cout << "\n";
-		}
-	}
-
-
-
-
-	cout << "\n\n========AFTER_MERGING========\n";
-	for (auto str: s)
-	{
-		for (auto ch : str)
-		{
-			cout << ch;
-		}
-		cout << "\n";
-	}
+    cin>>n;
+	clock_t start = clock();
+    n%2;
+     clock_t _end = clock()-start;
+    double cpu_time_used = ((double) (_end - start)) / CLOCKS_PER_SEC;
+    cout<<cpu_time_used;
 	return 0;
 }
 /*
