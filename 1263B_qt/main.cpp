@@ -31,6 +31,8 @@ void f2(set<char>& queue)
     parent->insert(queue.begin(), queue.end());
 }*/
 
+const bool debugMode=false;
+
 int main()
 {
     ui n;
@@ -61,27 +63,30 @@ int main()
                 //does it work properly
                 for (char symbol : temporaryParent)
                 {
-                    cout << symbol << " ";
+                    if(debugMode)
+                           cout << symbol << " ";
                     //at least one symbol in parent
                     if ((*password).find(symbol) != password->end())
                     {
-                        cout << "Given first set: \"";
-                        for (char aSetToPrint : temporaryParent)
-                        {
-                                cout << aSetToPrint;
+                        if(debugMode){
+                            cout << "Given first set: \"";
+                            for (char aSetToPrint : temporaryParent)
+                            {
+                                    cout << aSetToPrint;
+                            }
+                            cout << "\", and second set: \"";
+                            for (char symToPrint : *password)
+                            {
+                                cout << symToPrint;
+                            }
+                            cout<<"\", common item is '"<<symbol<<"'. Union that to parent: \"";
+                            for (char parentSetToPrint : *parent)
+                            {
+                                cout << parentSetToPrint;
+                            }
+                            //cout << ((*password).find(symbol));
+                            cout<< "\"\n";
                         }
-                        cout << "\", and second set: \"";
-                        for (char symToPrint : *password)
-                        {
-                            cout << symToPrint;
-                        }
-                        cout<<"\", common item is '"<<symbol<<"'. Union that to parent: \"";
-                        for (char parentSetToPrint : *parent)
-                        {
-                            cout << parentSetToPrint;
-                        }
-                        //cout << ((*password).find(symbol));
-                        cout<< "\"\n";
 
                         //delete parent->insert(password->begin(), password->end());
                         queue.insert(password->begin(), password->end());
@@ -93,8 +98,8 @@ int main()
                     }
                 }
                 //deprecated
-
-                cout << "\n";
+                if(debugMode)
+                    cout << "\n";
             }
            //before going to next parent check if
 //            password = parent;
@@ -125,16 +130,18 @@ int main()
 
 
 
-
-    cout << "\n\n========AFTER_MERGING========\n";
-    for (auto str: s)
-    {
-        for (auto ch : str)
+    if(debugMode){
+        cout << "\n\n========AFTER_MERGING========\n";
+        for (auto str: s)
         {
-            cout << ch;
+            for (auto ch : str)
+            {
+                cout << ch;
+            }
+            cout << "\n";
         }
-        cout << "\n";
     }
+    cout<<s.size();
     return 0;
 }
 /*

@@ -1,9 +1,6 @@
 # depslib dependency file v1.0
-1580281439 source:d:\2-i_fedorko_problems\1263d\main.cpp
-	<iostream>
-	<algorithm>
-	<vector>
-	<set>
-	<iterator>
-	<list>
+1580298841 source:d:\2-i_fedorko_problems\1263d\main.cpp
+	<bits/stdc++.h>
+	<stdio.h>
+	<time.h>
 

@@ -31,7 +31,17 @@ int main()
 		l <<= n%30;
 		cout<<l<<"\n";
 	}
-	
-	
+	if(n==c)
+	{
+		
+	}
+	else if(n-c == 1)
+	{
+		
+	}
+	else if()
+	{
+		
+	}
 }
 
