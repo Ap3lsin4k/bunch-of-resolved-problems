@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Plane.qml</file>
-        <file>airplane.png</file>
-        <file>marker.png</file>
-        <file>Фон.png</file>
-    </qresource>
-</RCC>
