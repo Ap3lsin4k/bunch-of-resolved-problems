@@ -7,7 +7,7 @@ Since childhood I loved Math. I started programming in 2016. By the end of the l
 ## Tech side
 Description: http://codeforces.com/problemset
 
-The repository contain only one sixths of all the 'problems' I have ever resolved.
+The repository contains only one sixths of all the 'problems' I have ever resolved.
 
 ## Why?
 I just found it today, and thought it would be cool to share :)
