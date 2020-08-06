@@ -1,0 +1,16 @@
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\bin\Debug\koordunatamouse.exe
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\bin\Debug\koordunatamouse.pdb
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.csproj.GenerateResource.Cache
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.exe
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.pdb
+C:\Users\Admin\Documents\Visual Studio 2010\Projects\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.csprojResolveAssemblyReference.cache
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.exe
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.pdb
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\bin\Debug\koordunatamouse.exe
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\bin\Debug\koordunatamouse.pdb
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.csprojResolveAssemblyReference.cache
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Fedorko Andriy\2017\Осінь\koordunatamouse\koordunatamouse\obj\x86\Debug\koordunatamouse.csproj.GenerateResource.Cache

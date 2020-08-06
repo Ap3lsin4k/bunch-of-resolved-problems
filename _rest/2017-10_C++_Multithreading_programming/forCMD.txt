@@ -1,0 +1,3 @@
+D:
+cd D:\FreelanceHUNT\MPI\Microsoft HPC Pack 2012\Bin
+mpiexec.exe -n 4 D:\FreelanceHUNT\03_Massage_Parssing_Programing\Debug\03_Massage_Parssing_Programing.exe
