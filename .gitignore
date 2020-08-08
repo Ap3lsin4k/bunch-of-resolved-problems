@@ -1,1 +1,10 @@
 *.exe
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.log
+*.obj
+*.tlog
+Debug/
